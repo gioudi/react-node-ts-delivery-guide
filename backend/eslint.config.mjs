@@ -43,6 +43,7 @@ export default [
     },
 
     rules: {
+      "@typescript-eslint/no-explicit-any": ["off"],
       'no-var': 'error',
       'no-empty': 'off',
       semi: 'error',
