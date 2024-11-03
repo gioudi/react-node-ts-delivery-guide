@@ -43,7 +43,8 @@ export default [
     },
 
     rules: {
-      "@typescript-eslint/no-explicit-any": ["off"],
+      '@typescript-eslint/no-explicit-any': ['off'],
+      '@typescript-eslint/no-require-imports': ['off'],
       'no-var': 'error',
       'no-empty': 'off',
       semi: 'error',
