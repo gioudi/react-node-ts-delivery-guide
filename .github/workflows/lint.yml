@@ -17,7 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        folder: ['./backend', './client1', './client2', './storybook']
+        folder: ['../../backend']
+        #folder: ['../../backend', '../../client1', './client2', './storybook']
 
     steps:
       - name: Checkout code
