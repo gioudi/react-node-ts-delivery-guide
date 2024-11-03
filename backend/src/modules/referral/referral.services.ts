@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { Terminal } from './terminal.types';
+import { Guides } from './referral.types';
 
-export class TerminalService {
-  async handleGetTerminals(): Promise<any | null> {
+export class ReferralService {
+  async handleGetReferrals(guides: Guides): Promise<any | null> {
     try {
-      const response = await axios.get<Terminal>(`${process.env.COORDINADORA_API_BASE_URL_TERMINAL}`);
+      const payload = {"guias": guides};
+      const response = await axios.post<any>(`${process.env.COORDINADORA_API_BASE_URL_REFERRAL}`,payload);
       if (response?.data) {
         const { data } = response;
         const author = { name: 'Sergio', lastname: 'Penagos' };
@@ -14,7 +15,6 @@ export class TerminalService {
       console.error(error);
       return error;
     }
-
     return null;
   }
 }

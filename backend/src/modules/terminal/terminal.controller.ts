@@ -4,7 +4,7 @@ import { TerminalService } from './terminal.services';
 class TerminalController {
   constructor(private terminalService: TerminalService) {}
 
-  async handleGetGuideById(req: Request, res: Response) {
+  async handleGetTerminals(req: Request, res: Response) {
     try {
       const { data, author } = await this.terminalService.handleGetTerminals();
       if (data) {
