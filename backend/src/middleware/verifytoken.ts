@@ -10,10 +10,10 @@ const verifyToken = (
   if (!token) {
     return res.status(403).json({ message: 'No token provide' });
   }
-  
+
   jwt.verify(token, process.env.JWT_SECRET || 'default_secret', (err: any, decoded: any) => {
     if (err) {
-      return res.status(401).json({ message: `Unauthorized ${err}`},);
+      return res.status(401).json({ message: `Unauthorized ${err}` });
     }
 
     req.userId = decoded.userId;

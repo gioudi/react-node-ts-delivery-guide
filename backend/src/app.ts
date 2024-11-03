@@ -3,8 +3,8 @@ import { corsMiddleware } from './middleware/cors';
 import './config/environment.config';
 import authRoutes from './modules/auth/auth.routes';
 import guideRoutes from './modules/guide/guide.routes';
-const verifyToken = require('./middleware/verifyToken'); 
-
+import terminalRoutes from './modules/terminal/terminal.routes';
+const verifyToken = require('./middleware/verifyToken');
 
 const cors = require('cors');
 const app = express();
@@ -23,5 +23,6 @@ app.use('/api/auth', authRoutes);
 // Private Routes
 
 app.use('/api/guide', verifyToken, guideRoutes);
+app.use('/api/terminal', verifyToken, terminalRoutes);
 
 export default app;

@@ -12,7 +12,7 @@ class GuideController {
       if (data) {
         res.status(200).json({ data, author });
       } else {
-        res.status(401).json({error: 'Error fetching guide'});
+        res.status(401).json({ error: 'Error fetching guide' });
       }
     } catch (error) {
       res.status(500).json({ message: 'Error fetching guide', error: error });
