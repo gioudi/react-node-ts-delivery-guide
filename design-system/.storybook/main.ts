@@ -6,13 +6,13 @@ const config = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-styling',
   ],
   framework: {
     name: '@storybook/react-vite',
-    options: {},
+    options: { },
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async viteFinal(config: any) {
+  async viteFinal(config) {
     return mergeConfig(config, {
     });
   },
