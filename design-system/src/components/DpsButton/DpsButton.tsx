@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
-import { fontSize, styled } from "@mui/system";
+import { styled } from "@mui/system";
 
 interface CustomButtonProps {
   text: string;
