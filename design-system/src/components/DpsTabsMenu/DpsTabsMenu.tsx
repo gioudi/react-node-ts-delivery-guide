@@ -43,7 +43,7 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any
   padding: variant === 'icon' ? '8px 16px' : '12px 24px',
   fontSize: '14px',
   margin: variant === 'icon' ? '0px 6px' : '0',
-  lineHeight: variant === 'icon' ? '32px' : '42px',
+  lineHeight: variant === 'icon' ? '25px' : '35px',
   minHeight: '32px',
 
   '&.Mui-selected': {
@@ -86,7 +86,8 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any
     },
     '& .MuiSvgIcon-root': {
       marginBottom: '0',
-      marginRight: '4px'
+      marginRight: '4px',
+      fontSize: '18px',
     }
   }),
 }));
