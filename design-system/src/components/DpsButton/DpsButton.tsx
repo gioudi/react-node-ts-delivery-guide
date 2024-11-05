@@ -1,18 +1,12 @@
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
+import { CustomButtonProps } from "./types";
 
-interface CustomButtonProps {
-  text: string;
-  onClick: () => void;
-  variant?: "text" | "contained" | "outlined";
-  loading?: boolean;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StyledButton = styled(Button)(({ theme, variant }: any) => ({
+
+
+const StyledButton = styled(Button)(({ theme, variant }) => ({
   ...(variant === "contained" && {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
@@ -61,7 +55,7 @@ const StyledButton = styled(Button)(({ theme, variant }: any) => ({
   },
 }));
 
-const CustomButton: React.FC<CustomButtonProps> = ({
+const DpsButton: React.FC<CustomButtonProps> = ({
   text,
   onClick,
   variant = "contained",
@@ -93,4 +87,4 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   );
 };
 
-export default CustomButton;
+export default DpsButton;
