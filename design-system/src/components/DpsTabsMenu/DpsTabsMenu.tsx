@@ -24,7 +24,7 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
     color: theme.palette.text.primary,
     '&.Mui-selected': {
         color: theme.palette.primary.main,
-        fontWeight: theme?.typography?.fontWeightMedium,
+        fontWeight: 600,
     },
     '&.Mui-focusVisible': {
         backgroundColor: theme.palette.action.focus,
