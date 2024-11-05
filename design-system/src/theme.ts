@@ -1,25 +1,35 @@
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
-    interface Palette {
-      custom: {
-        lightGray: string;
-        mediumGray: string;
-        darkGray: string;
-        translucentBlack: string;
-        semiTransparent: string;
-      };
-    }
-    interface PaletteOptions {
-      custom?: {
-        lightGray: string;
-        mediumGray: string;
-        darkGray: string;
-        translucentBlack: string;
-        semiTransparent: string;
-      };
-    }
+  interface Palette {
+    custom: {
+      lightGray: string;
+      mediumGray: string;
+      darkGray: string;
+      translucentBlack: string;
+      semiTransparent: string;
+    };
+    blue: {
+      main: string;
+      light: string;
+      dark: string;
+    };
   }
+  interface PaletteOptions {
+    custom?: {
+      lightGray: string;
+      mediumGray: string;
+      darkGray: string;
+      translucentBlack: string;
+      semiTransparent: string;
+    };
+    blue: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+  }
+}
 
 const theme = createTheme({
   palette: {
@@ -33,14 +43,19 @@ const theme = createTheme({
       dark: '#003C82',
     },
     secondary: {
-      main: '#EE5A31', 
+      main: '#EE5A31',
     },
     background: {
-      default: '#E0E6E9', 
+      default: '#E0E6E9',
     },
     text: {
-      primary: '#212121', 
+      primary: '#212121',
       secondary: '#9E9E9E',
+    },
+    blue: {
+      main: '#00ADEE',      
+      light: '#0A6BB6',    
+      dark: '#005A8D',  
     },
     custom: {
       lightGray: '#0000001F',
@@ -50,10 +65,10 @@ const theme = createTheme({
       semiTransparent: '#0000008A',
     },
   },
-  typography:{
+  typography: {
     fontFamily: 'Roboto, Arial, sans-serif',
-    fontWeightMedium: 600
-  }
+    fontWeightMedium: 600,
+  },
 });
 
 export default theme;

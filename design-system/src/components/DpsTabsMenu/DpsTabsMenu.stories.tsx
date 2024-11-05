@@ -4,7 +4,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import InfoIcon from '@mui/icons-material/Info';
 
 
-const tabsData = [
+const tabsRoundedData = [
     {
         label: 'Form example',
         icon: <SearchIcon />,
@@ -36,13 +36,48 @@ const tabsData = [
     },
 ];
 
+const tabsData = [
+    {
+        label: 'Form example',
+        content: (
+            <form>
+                <label>
+                    Label 1:
+                    <input type="text" name="name" />
+                </label>
+            </form>
+        ),
+    },
+    {
+        label: 'Text',
+        content: <div>This is some text content for the second tab.</div>,
+    },
+    {
+        label: 'Input',
+        content: (
+            <div>
+                <label>
+                    Email:
+                    <input type="email" name="email" />
+                </label>
+            </div>
+        ),
+    },
+];
+
 export default  {
     component: DpsTabsMenu
 }
 
+export const RoundedDpsTabsMenu = () => {
+    return (
+        <DpsTabsMenu tabs={tabsRoundedData}  variant="icon"/>
+    );
+};
+
 export const DefaultDpsTabsMenu = () => {
     return (
-        <DpsTabsMenu tabs={tabsData} />
+        <DpsTabsMenu tabs={tabsData}  variant="text"/>
     );
 };
 
