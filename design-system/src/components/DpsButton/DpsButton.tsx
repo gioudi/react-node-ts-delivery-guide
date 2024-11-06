@@ -1,43 +1,37 @@
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
+import { CustomButtonProps } from "./types";
 
-interface CustomButtonProps {
-  text: string;
-  onClick: () => void;
-  variant?: "text" | "contained" | "outlined";
-  loading?: boolean;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StyledButton = styled(Button)(({ theme, variant }: any) => ({
+
+
+const StyledButton = styled(Button)(({ theme, variant }) => ({
   ...(variant === "contained" && {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary?.main,
+    color: theme.palette.common?.white,
     fontSize: "12px",
     lineHeight: "14px",
     "&:hover": {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary?.light,
     },
   }),
   ...(variant === "outlined" && {
-    border: `1px solid ${theme.palette.primary.main}`,
-    color: theme.palette.primary.light,
+    border: `1px solid ${theme.palette.primary?.main}`,
+    color: theme.palette.primary?.light,
     fontSize: "12px",
     lineHeight: "14px",
     "&:hover": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary?.main,
     },
   }),
   ...(variant === "text" && {
-    color: theme.palette.blue.main,
+    color: theme.palette.blue?.main,
     fontSize: "16px",
     lineHeight: "18px",
     marginRight: "8px",
     "&:hover": {
-      color: theme.palette.primary.light,
+      color: theme.palette.primary?.light,
       backgroundColor: "transparent",
     },
   }),
@@ -61,7 +55,7 @@ const StyledButton = styled(Button)(({ theme, variant }: any) => ({
   },
 }));
 
-const CustomButton: React.FC<CustomButtonProps> = ({
+const DpsButton: React.FC<CustomButtonProps> = ({
   text,
   onClick,
   variant = "contained",
@@ -93,4 +87,4 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   );
 };
 
-export default CustomButton;
+export default DpsButton;

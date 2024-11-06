@@ -20,7 +20,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "design-system/*": ["../design-system/src/components/*"],
+      "theme/*": ["../design-system/src/*"]
+    }
   },
-  "include": ["src", "src/**/*.d.ts", "tests/**/*.ts", "tests/**/*.tsx"]
+  "include": ["src"]
 }
