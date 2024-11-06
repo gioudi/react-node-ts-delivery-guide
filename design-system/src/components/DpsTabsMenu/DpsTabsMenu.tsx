@@ -15,8 +15,8 @@ interface DpsTabsMenuProps {
 
 const StyledTabs = styled((props) => <Tabs {...props} />)(({ theme, variant }) => ({
   ...(variant === 'text' && {
-    backgroundColor: theme.palette.common.white,
-    borderBottom: `1px solid ${theme.palette.primary.main}`,
+    backgroundColor: theme.palette.common?.white,
+    borderBottom: `1px solid ${theme.palette.primary?.main}`,
   }),
 
   ...(variant === 'icon' && {
@@ -38,7 +38,7 @@ const StyledTabs = styled((props) => <Tabs {...props} />)(({ theme, variant }) =
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any) => ({
   textTransform: 'none',
-  color: theme.palette.custom.darkGray,
+  color: theme.palette.custom?.darkGray,
   fontWeight: 600,
   padding: variant === 'icon' ? '8px 16px' : '12px 24px',
   fontSize: '14px',
@@ -47,14 +47,14 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any
   minHeight: '32px',
 
   '&.Mui-selected': {
-    color: variant === 'icon' ? theme.palette.common.white : theme.palette.primary.main,
-    backgroundColor: variant === 'icon' ? theme.palette.blue.light : theme.palette.primary.main + 10, 
+    color: variant === 'icon' ? theme.palette.common?.white : theme.palette.primary?.main,
+    backgroundColor: variant === 'icon' ? theme.palette.blue?.light : theme.palette.primary?.main + 10, 
     fontWeight: 700,
     borderRadius: variant === 'icon' ? '25px' : '0px',
   },
 
   '&.Mui-focusVisible': {
-    backgroundColor: theme.palette.action.focus,
+    backgroundColor: theme.palette.action?.focus,
   },
 
   
@@ -62,7 +62,7 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any
   ...(variant === 'text' && {
     border: 'none',
     '&:hover': {
-      backgroundColor: theme.palette.primary.main + '10',
+      backgroundColor: theme.palette.primary?.main + '10',
     },
   }),
 
@@ -78,8 +78,8 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme, variant }: any
     fontSize: '14px',
     padding: '8px 16px',
     '&:hover': {
-      backgroundColor: theme.palette.primary.main + '10',
-      color: theme.palette.primary.main
+      backgroundColor: theme.palette.primary?.main + '10',
+      color: theme.palette.primary?.main
     },
     '& .MuiButtonBase-root': {
       minHeight: '32px !important',
