@@ -8,30 +8,30 @@ import { CustomButtonProps } from "./types";
 
 const StyledButton = styled(Button)(({ theme, variant }) => ({
   ...(variant === "contained" && {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary?.main,
+    color: theme.palette.common?.white,
     fontSize: "12px",
     lineHeight: "14px",
     "&:hover": {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary?.light,
     },
   }),
   ...(variant === "outlined" && {
-    border: `1px solid ${theme.palette.primary.main}`,
-    color: theme.palette.primary.light,
+    border: `1px solid ${theme.palette.primary?.main}`,
+    color: theme.palette.primary?.light,
     fontSize: "12px",
     lineHeight: "14px",
     "&:hover": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary?.main,
     },
   }),
   ...(variant === "text" && {
-    color: theme.palette.blue.main,
+    color: theme.palette.blue?.main,
     fontSize: "16px",
     lineHeight: "18px",
     marginRight: "8px",
     "&:hover": {
-      color: theme.palette.primary.light,
+      color: theme.palette.primary?.light,
       backgroundColor: "transparent",
     },
   }),

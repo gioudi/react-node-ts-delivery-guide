@@ -1,150 +1,237 @@
-import React, { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { AppState } from '../redux/store';
+import React, { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import { AppDispatch, AppState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../features/Auth/authSlice';
+import {
+  Menu as MenuIcon,
+  Search as SearchIcon,
+  AccountCircle,
+  GridOn as GridIcon,
+  Padding,
+} from '@mui/icons-material';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Box,
+  Avatar,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Switch,
+  Container,
+  Grid,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  fetchTerminals,
+  setSelectedTerminal,
+} from '../features/Terminal/terminalSlice';
+import AlertComponent from '../components/AlertComponent';
+import SpinnerComponent from '../components/SpinnerComponent';
 
 
 const MainLayout: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const date = new Date().getFullYear();
+  const dispatch: AppDispatch = useDispatch();
   const { token } = useSelector((state: AppState) => state.auth);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { terminals, selectedTerminal, loading, error } = useSelector(
+    (state: AppState) => state.terminals
+  );
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [alertVisible, setAlertVisible] = useState<boolean>(false);
+  const date = new Date().getFullYear();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  console.log(terminals);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchTerminals());
+    }
+  }, [dispatch, token]);
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/login');
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleTerminalSelect = (terminal: string) => {
+    dispatch(setSelectedTerminal(terminal));
+    handleMenuClose();
+  };
+
+  useEffect(() => {
+    if (error) {
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 5000);
+    }
+  }, [error]);
+
+  const handleAlertClose = () => {
+    setAlertVisible(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <Box
+      component="section"
+      sx={{
+        backgroundColor: 'white',
+        boxShadow: 1,
+        margin: 0,
+        width: '100%',
+        p: 0,
+      }}
+    >
+      {loading && <SpinnerComponent />}
+      {error && (
+        <AlertComponent
+          kind="danger"
+          message={'No fue posible cargar las terminales'}
+          title="Error"
+          visible={alertVisible}
+          onClose={handleAlertClose}
+        />
+      )}
       {/* Header */}
-      <nav className="bg-white border-gray-200 shadow-md mb-4">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-          <Link
-            to={'/'}
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img src="" alt="" />
-          </Link>
-          <button
-            type="button"
-            onClick={toggleMenu}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-            aria-controls="navbar-default"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+      <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: 1 }}>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+           Logo
+          </Typography>
 
-          <div
-            className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`}
-            id="navbar-default"
-          >
-            <ul className="font-medium flex flex-col sm:justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
-              {!token ? (
-                <>
-                  <li className="flex sm:py-4 md:py-1 justify-center">
-                    <Link
-                      to={'/login'}
-                      className="text-primary hover:text-primary-500 bg-transparent px-4 py-2 transition text-center"
-                    >
-                      Iniciar sesión
-                    </Link>
-                  </li>
-                  <li className="flex sm:py-4 md:py-1 justify-center">
-                    <Link
-                      to={'/register'}
-                      className="bg-transparent border-2 border-secondary text-secondary py-2 px-4 rounded-lg text-center hover:bg-secondary hover:text-white transition"
-                    >
-                      Registrarse
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="flex sm:py-4 md:py-1 justify-center">
-                    <p className="font-semibold py-2 px-4">Bienvenido !</p>
-                  </li>
-                  <li className="flex sm:py-4 md:py-1 justify-center">
-                    <button
-                      onClick={handleLogout}
-                      className="bg-transparent border-2 border-secondary text-secondary py-2 px-4 rounded-lg text-center hover:bg-secondary hover:text-white transition"
-                    >
-                      Cerrar sesión
-                    </button>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-      </nav>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="body1" sx={{ mr: 2 }}>
+              Nombre de usuario
+            </Typography>
+            <Avatar sx={{ width: 32, height: 32, mr: 2 }}></Avatar>
+            {token && (
+            <>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                {terminals.map((terminal: any, index: number) => (
+                  <MenuItem
+                    key={index}
+                    onClick={() => handleTerminalSelect(terminal.nombre)}
+                    sx={{
+                      backgroundColor: selectedTerminal === terminal.nombre ? '#f0f0f0' : 'transparent',
+                      '&:hover': {
+                        backgroundColor: '#e0e0e0',
+                      },
+                    }}
+                  >
+                    {terminal.nombre}
+                  </MenuItem>
+                ))}
+              </Menu>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+                <Typography variant="body2" sx={{ color: selectedTerminal ? '#000' : '#9e9e9e', mr: 1 }}>
+                  Terminal
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: selectedTerminal ? '#000' : '#9e9e9e',
+                    fontWeight: 'bold',
+                    mr: 1,
+                  }}
+                >
+                  {selectedTerminal || 'Seleccione una terminal'}
+                </Typography>
+                <IconButton onClick={handleMenuClick} color="inherit">
+                <ExpandMoreIcon sx={{ color: '#000', fontSize: '1rem' }}  /></IconButton>
+              </Box>
+            </>
+          )}
+          </Box>
+        </Toolbar>
+      </AppBar>
+
       {/* Main Content */}
-      <main className="flex-grow p-4">
+      <main style={{ height: '90vh' }}>
         <Outlet />
       </main>
 
       {/* Footer */}
-
-      {!token && (
-        <footer className="bg-white">
-          <div className="mx-auto w-full max-w-screen-xl">
-            <div className="px-4 py-6 justify-center text-center md:flex md:items-center md:justify-between">
-              <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
+      <Box
+        sx={{
+          backgroundColor: 'white',
+          width: '100%',
+          boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.12)',
+          marginTop: 'auto',
+        }}
+      >
+        <Container maxWidth="lg" sx={{ paddingLeft: 0, paddingRight: 0,  height: '40px'}}>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ paddingLeft: 0, paddingRight: 0 }}
+          >
+            <Grid item xs={12} md={6} textAlign={{ xs: 'center', md: 'left' }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ textAlign: 'center', sm: 'left' }}
+              >
                 © {date}{' '}
-                <a href="https://gioudi.github.io/portfolio/" target="_blank">
+                <Link
+                  href="https://gioudi.github.io/portfolio/"
+                  target="_blank"
+                  color="inherit"
+                >
                   Sergio Penagos
-                </a>
+                </Link>
                 . Derechos reservados.
-              </span>
-              <div className="flex mt-4 justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
-                <a
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%'
+                }}
+              >
+                <Link
                   href="https://github.com/gioudi"
                   target="_blank"
-                  className="text-gray-400 hover:text-gray-900"
+                  sx={{
+                    color: 'text.secondary', margin: 0,
+                    '&:hover': { color: 'text.primary' },
+                  }}
                 >
                   <svg
-                    className="w-4 h-4"
-                    aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 20 20"
+                    width="20"
+                    height="20"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
-                  <span className="sr-only">GitHub account</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
-      )}
-    </div>
+                  <span className="sr-only">Github</span>
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 

@@ -11,7 +11,7 @@ export const useAuthRedirect = (isProtected: boolean) => {
     if (isProtected && !token) {
       navigate('/login');
     } else if (!isProtected && token) {
-      navigate('/home');
+      navigate('/');
     }
   }, [isProtected, token, navigate]);
 };

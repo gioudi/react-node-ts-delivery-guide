@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthState, Login } from './types';
-import apiClient from './api';
-
+import apiClient from '../../api';
 
 const initialState: AuthState = {
   token: localStorage.getItem('authToken') || null,
@@ -21,7 +20,6 @@ export const handleLogin = createAsyncThunk(
     return response.data;
   }
 );
-
 
 const authSlice = createSlice({
   name: 'auth',
@@ -48,7 +46,7 @@ const authSlice = createSlice({
       .addCase(handleLogin.rejected, (state, action) => {
         state.error = action.error.message || 'Login failed';
         state.loading = false;
-      })
+      });
   },
 });
 

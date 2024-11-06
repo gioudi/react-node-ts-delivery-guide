@@ -2,6 +2,8 @@ import React from 'react';
 import theme from '../src/theme';
 import { ThemeProvider } from '@emotion/react';
 import '../src/styles/index.scss';
+//import { CssBaseline } from '@mui/material';
+
 
 
 export const parameters = {
@@ -19,6 +21,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
+      
       <Story />
     </ThemeProvider>
   ),

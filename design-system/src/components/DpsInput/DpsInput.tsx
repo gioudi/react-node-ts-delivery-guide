@@ -6,7 +6,9 @@ interface InputProps {
   type: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -15,17 +17,17 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   textAlign: 'left',
   border: 'none',
   '& .MuiInputBase-root': {
-    backgroundColor: theme.palette.custom.lightGray,
+    backgroundColor: theme.palette.custom ?? theme.palette.custom?.lightGray,
     borderRadius: '25px',
     fontSize: '12px',
     height: '32px',
     padding: '8px 16px',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text?.secondary,
     fontWeight: '600',
     boxSizing: 'border-box',
     border: 'none',
     '&:hover' : {
-        borderColor: theme.palette.blue.light,
+        borderColor: theme.palette.blue?.light,
      },
     '& .MuiOutlinedInput-notchedOutline': {
         border: 'none',
@@ -33,28 +35,30 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     }
   },
   '& .MuiOutlinedInput-root': {
-    borderColor: theme.palette.blue.light,
+    borderColor: theme.palette.blue?.light,
   },
   '& .MuiOutlinedInput-root.Mui-focused': {
-    borderColor: theme.palette.blue.light, 
+    borderColor: theme.palette.blue?.light, 
   },
  
   '& .MuiInputBase-input': {
-    color: theme.palette.text.primary,
+    color: theme.palette.text?.primary,
   },
 }));
 
-const InputComponent: React.FC<InputProps> = ({ type, value, onChange, placeholder }) => {
+const DpsInput: React.FC<InputProps> = ({ type, value, onChange, onKeyDown, placeholder,disabled }) => {
   return (
     <StyledTextField
       type={type}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       placeholder={placeholder}
       variant="outlined"
       fullWidth
+      disabled={disabled}
     />
   );
 };
 
-export default InputComponent;
+export default DpsInput;
