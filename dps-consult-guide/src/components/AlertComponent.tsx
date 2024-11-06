@@ -9,7 +9,7 @@ interface AlertProps {
   title: string;
   kind: AlertType;
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const AlertComponent: React.FC<AlertProps> = ({

@@ -14,7 +14,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<LoginScreen />} />
           <Route path="/guide" element={<GuideScreen />} />
-          <Route path="/guide-detail/:id" element={<GuideDetailScreen />}  />
+          <Route path="/guide-detail/:id" element={<GuideDetailScreen />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Route>
       </Routes>

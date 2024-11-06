@@ -1,14 +1,14 @@
 import React from 'react';
-import { Box, Typography} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { SentimentDissatisfied as NotFoundIcon } from '@mui/icons-material';
 import DpsButton from 'design-system/DpsButton/DpsButton';
 import { useNavigate } from 'react-router-dom';
 
 const NotFoundScreen: React.FC = () => {
   const navigate = useNavigate();
-  const handleRedirect = ()=> {
+  const handleRedirect = () => {
     navigate('/');
-  }
+  };
 
   return (
     <Box
@@ -37,9 +37,7 @@ const NotFoundScreen: React.FC = () => {
         variant="contained"
         onClick={handleRedirect}
         text={'Volver al Inicio'}
-      >
-        
-      </DpsButton>
+      ></DpsButton>
     </Box>
   );
 };

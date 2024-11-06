@@ -97,11 +97,11 @@ const Circle = styled(Box)(({ isActive, isError, isLast }) => ({
     width: '55px',
     height: '55px',
     borderRadius: '50%',
-    backgroundColor: isActive ? theme.palette.primary.dark : isError ? theme.palette.secondary.main : '#E1EDFB',
+    backgroundColor: isActive ? theme.palette.primary?.dark : isError ? theme.palette.secondary?.main : '#E1EDFB',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: isActive || isError ? theme.palette.common.white : theme.palette.primary.dark,
+    color: isActive || isError ? theme.palette.common?.white : theme.palette.primary?.dark,
     fontSize: '30px',
     position: 'relative',
 
@@ -115,8 +115,8 @@ const Circle = styled(Box)(({ isActive, isError, isLast }) => ({
               left: 0,
               background: `${
                   isActive
-                      ? theme.palette.primary.dark
-                      : theme.palette.primary.light
+                      ? theme.palette.primary?.dark
+                      : theme.palette.primary?.light
               }`,
               zIndex: -1,
               minWidth: '190px',
@@ -128,7 +128,7 @@ const Circle = styled(Box)(({ isActive, isError, isLast }) => ({
               width: '1px',
               left: '50%',
               height: '50px',
-              background: theme.palette.background.default,
+              background: theme.palette.background?.default,
               zIndex: -1,
     },
 }));
@@ -153,10 +153,10 @@ const ScrollButton = styled(IconButton)(({ theme }) => ({
     top: '30%',
     transform: 'translateY(-50%)',
     zIndex: 1,
-    backgroundColor: theme.palette.custom.mediumGray,
+    backgroundColor: theme.palette.custom?.mediumGray,
     borderRadius: '50%',
     padding: '10px',
-    color: theme.palette.primary.dark
+    color: theme.palette.primary?.dark
 }));
 
 const DpsTimeLine: React.FC<DpsTimeLineProps> = ({ tabs }) => {

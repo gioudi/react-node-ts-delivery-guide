@@ -31,7 +31,6 @@ import {
 import AlertComponent from '../components/AlertComponent';
 import SpinnerComponent from '../components/SpinnerComponent';
 
-
 const MainLayout: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { token } = useSelector((state: AppState) => state.auth);
@@ -41,8 +40,6 @@ const MainLayout: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const date = new Date().getFullYear();
-
-  console.log(terminals);
 
   useEffect(() => {
     if (token) {
@@ -101,7 +98,7 @@ const MainLayout: React.FC = () => {
       <AppBar position="sticky" sx={{ backgroundColor: 'white', boxShadow: 1 }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-           Logo
+            Logo
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -110,47 +107,54 @@ const MainLayout: React.FC = () => {
             </Typography>
             <Avatar sx={{ width: 32, height: 32, mr: 2 }}></Avatar>
             {token && (
-            <>
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                {terminals.map((terminal: any, index: number) => (
-                  <MenuItem
-                    key={index}
-                    onClick={() => handleTerminalSelect(terminal.nombre)}
+              <>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  {terminals.map((terminal: any, index: number) => (
+                    <MenuItem
+                      key={index}
+                      onClick={() => handleTerminalSelect(terminal.nombre)}
+                      sx={{
+                        backgroundColor:
+                          selectedTerminal === terminal.nombre
+                            ? '#f0f0f0'
+                            : 'transparent',
+                        '&:hover': {
+                          backgroundColor: '#e0e0e0',
+                        },
+                      }}
+                    >
+                      {terminal.nombre}
+                    </MenuItem>
+                  ))}
+                </Menu>
+
+                <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: selectedTerminal ? '#000' : '#9e9e9e', mr: 1 }}
+                  >
+                    Terminal
+                  </Typography>
+                  <Typography
+                    variant="body2"
                     sx={{
-                      backgroundColor: selectedTerminal === terminal.nombre ? '#f0f0f0' : 'transparent',
-                      '&:hover': {
-                        backgroundColor: '#e0e0e0',
-                      },
+                      color: selectedTerminal ? '#000' : '#9e9e9e',
+                      fontWeight: 'bold',
+                      mr: 1,
                     }}
                   >
-                    {terminal.nombre}
-                  </MenuItem>
-                ))}
-              </Menu>
-
-              <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-                <Typography variant="body2" sx={{ color: selectedTerminal ? '#000' : '#9e9e9e', mr: 1 }}>
-                  Terminal
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: selectedTerminal ? '#000' : '#9e9e9e',
-                    fontWeight: 'bold',
-                    mr: 1,
-                  }}
-                >
-                  {selectedTerminal || 'Seleccione una terminal'}
-                </Typography>
-                <IconButton onClick={handleMenuClick} color="inherit">
-                <ExpandMoreIcon sx={{ color: '#000', fontSize: '1rem' }}  /></IconButton>
-              </Box>
-            </>
-          )}
+                    {selectedTerminal || 'Seleccione una terminal'}
+                  </Typography>
+                  <IconButton onClick={handleMenuClick} color="inherit">
+                    <ExpandMoreIcon sx={{ color: '#000', fontSize: '1rem' }} />
+                  </IconButton>
+                </Box>
+              </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -169,7 +173,10 @@ const MainLayout: React.FC = () => {
           marginTop: 'auto',
         }}
       >
-        <Container maxWidth="lg" sx={{ paddingLeft: 0, paddingRight: 0,  height: '40px'}}>
+        <Container
+          maxWidth="lg"
+          sx={{ paddingLeft: 0, paddingRight: 0, height: '40px' }}
+        >
           <Grid
             container
             justifyContent="space-between"
@@ -200,14 +207,15 @@ const MainLayout: React.FC = () => {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%'
+                  height: '100%',
                 }}
               >
                 <Link
                   href="https://github.com/gioudi"
                   target="_blank"
                   sx={{
-                    color: 'text.secondary', margin: 0,
+                    color: 'text.secondary',
+                    margin: 0,
                     '&:hover': { color: 'text.primary' },
                   }}
                 >

@@ -12,7 +12,6 @@ const initialState: TerminalState = {
 export const fetchTerminals = createAsyncThunk(
   'terminals/fetchTerminals',
   async () => {
-    
     const response = await apiClient.get('/terminal');
     return response.data.data;
   }
