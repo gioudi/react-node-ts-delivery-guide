@@ -109,8 +109,10 @@ const LoginScreen: React.FC = () => {
         <form onSubmit={handleSubmit} style={{ width: '100%' }}>
           <Grid container spacing={2}>
             {/* Email Input */}
-            <Grid item xs={12}
-             sx={{
+            <Grid
+              item
+              xs={12}
+              sx={{
                 mt: 3,
               }}
             >
@@ -121,15 +123,22 @@ const LoginScreen: React.FC = () => {
                 placeholder="Email"
               />
               {formError.email && (
-                <Typography color="error"  sx={{
+                <Typography
+                  color="error"
+                  sx={{
                     fontSize: '12px',
-                  }}>{formError.email}</Typography>
+                  }}
+                >
+                  {formError.email}
+                </Typography>
               )}
             </Grid>
 
             {/* Password Input */}
-            <Grid item xs={12}
-            sx={{
+            <Grid
+              item
+              xs={12}
+              sx={{
                 mt: 3,
               }}
             >
@@ -140,17 +149,22 @@ const LoginScreen: React.FC = () => {
                 placeholder="Password"
               />
               {formError.password && (
-                <Typography color="error"
-                sx={{
+                <Typography
+                  color="error"
+                  sx={{
                     fontSize: '12px',
                   }}
-                >{formError.password}</Typography>
+                >
+                  {formError.password}
+                </Typography>
               )}
             </Grid>
 
             {/* Submit Button */}
-            <Grid item xs={12}
-             sx={{
+            <Grid
+              item
+              xs={12}
+              sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -159,7 +173,11 @@ const LoginScreen: React.FC = () => {
               }}
             >
               <DpsButton
-                text={isSubmitting || authLoading ? 'Iniciando sesión..' : 'Iniciar sesión'}
+                text={
+                  isSubmitting || authLoading
+                    ? 'Iniciando sesión..'
+                    : 'Iniciar sesión'
+                }
                 variant="contained"
                 loading={isSubmitting || authLoading}
                 disabled={isSubmitting || authLoading}

@@ -13,7 +13,7 @@ export const handleGuideById = createAsyncThunk(
   'guide/handleGuideById',
   async (id: string) => {
     const response = await apiClient.get(`/guide/${id}`);
-    return response.data;
+    return response.data.data;
   }
 );
 
