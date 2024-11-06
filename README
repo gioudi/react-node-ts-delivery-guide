@@ -1,0 +1,124 @@
+# Proyecto `react-node-ts-delivery-guide`
+
+## Índice
+
+1. [Descripción del Proyecto](#descripción-del-proyecto)
+2. [Arquitectura y Estructura de Carpetas](#arquitectura-y-estructura-de-carpetas)
+3. [Configuración de Entorno](#configuración-de-entorno)
+4. [Módulos Backend](#módulos-backend)
+5. [Componentes y Storybook](#componentes-y-storybook)
+6. [Guías de Linter y Formateo de Código](#guías-de-linter-y-formateo-de-código)
+7. [Testing](#testing)
+8. [CI/CD con GitHub Actions](#cicd-con-github-actions)
+9. [Despliegue](#despliegue)
+---
+
+## Descripción del Proyecto
+
+El proyecto `react-node-ts-delivery-guide` es una aplicación diseñada para consultar guías y terminales.
+
+## Arquitectura y Estructura de Carpetas
+
+Este proyecto tiene una arquitectura basada en la modularización y la responsabilidad única. A continuación, se detalla la estructura de carpetas del proyecto:
+
+```plaintext
+react-node-ts-delivery-guide/
+├── .github/
+│   └── workflows/
+│       ├── lint.yml          # Workflow para ejecutar linter y gestionar dependencias
+│       ├── release-drafter.yml # Workflow para generar borradores de lanzamientos
+├── backend/src/
+│   ├── modules/auth/                  # Módulo de autenticación
+│   ├── modules/referral/              # Módulo para gestión de referidos
+│   ├── modules/terminal/              # Módulo para gestión de terminales
+│   ├── modules/guides/                # Módulo de gestión de guías
+│   ├── middleware/                    # Middleware
+│   └── config/                 # Configuraciones globales
+├── dps-consult-guide/         # Frontend de consulta de guías
+│   ├── src/
+│   │   ├── components/        # Componentes reutilizables, prefijo DPS
+│   │   ├── fetaures/          # Páginas principales de la aplicación
+│   │   ├── redux/             # Configuración de Redux y slices
+│   │   └── layouts/           # Layout 
+│   └── tests/                 # Pruebas unitarias y de integración
+└── storybook/                 # Storybook con componentes prefijo DPS
+
+```
+
+## Principales Tecnologías Utilizadas
+1. Backend: Node.js con TypeScript
+2. Frontend: React, Redux, Material UI, React Router
+3. Storybook: Utilizado para documentar y probar visualmente los componentes
+4. Linter y Formateo: ESLint, Prettier, TypeScript
+5. Testing: Jest (pendiente de configuración), SCSS
+
+## Configuración de Entorno
+Para ejecutar el proyecto localmente, es necesario configurar el archivo .env en las carpetas correspondientes. Los principales parámetros de entorno incluyen las configuraciones para el servidor de backend, el servicio de autenticación, y cualquier clave de API requerida para las consultas a los módulos de guías y terminales.
+
+
+
+# Backend
+
+API_BASE_URL=http://localhost:5000
+JWT_SECRET=your_jwt_secret
+
+# Frontend
+REACT_APP_API_BASE_URL=http://localhost:5000
+
+## Módulos Backend
+
+El backend está diseñado en base a módulos individuales, siguiendo los principios de responsabilidad única. Cada módulo tiene sus propios controladores, rutas y tipos, encapsulando completamente la lógica específica para asegurar que los cambios en un módulo no afecten a los demás.
+
+### Principales Módulos
+- Auth: Gestor de autenticación, que incluye endpoints para login.
+- Referral: Módulo para obtener los estados.
+- Terminal: Encargado de gestionar información de terminales y su estado.
+- Guides: Módulo para gestionar las guías.
+- Cada módulo utiliza clases y sigue el principio de Single Responsibility, lo cual permite una fácil extensibilidad y mantenimiento de las funcionalidades específicas.
+
+## Principios de Diseño Aplicados
+- Single Responsibility Principle: Cada clase y módulo tiene una única responsabilidad.
+- Modularización: Cada módulo es autónomo y puede ser actualizado sin afectar a los demás.
+- TypeScript: Todo el código del backend está tipado, lo que asegura un código más seguro y con menos errores.
+
+
+## Componentes y Storybook
+Dentro de storybook/, hemos creado una serie de componentes con el prefijo Dps. Actualmente, el proyecto incluye cuatro componentes en constante desarrollo. 
+
+### Estructura de Componentes en Storybook
+Cada componente tiene su respectivo archivo de stories, lo que permite probar y documentar los estados y variaciones visuales en un entorno aislado, facilitando el trabajo de diseño y desarrollo de UI.
+
+- Prefijo Dps: Todos los componentes llevan este prefijo para estandarizar el naming convention.
+- Estilos: Material UI, con algunas personalizaciones mediante SCSS.
+
+
+### Visualización en Storybook
+El Storybook se despliega en Chromatic para acceso remoto, permitiendo al equipo de desarrollo visualizar y validar la apariencia y el comportamiento de los componentes sin necesidad de ejecutarlo localmente.
+
+- Link: https://6729b5cf7872f880b62ccd54-izlnthxoma.chromatic.com/?path=/story/components-dpsbutton--default-dps-button
+
+
+## Testing
+Aunque Jest está en proceso de configuración, la estructura inicial de pruebas ya está presente en el proyecto. Además, se han incluido pruebas en SCSS y TypeScript para garantizar que los estilos y las funcionalidades básicas están en línea con los estándares de calidad.
+
+### Herramientas y Frameworks de Testing
+- Postman: Utilizado para la validación de endpoints en el backend.
+- SCSS: Se han realizado pruebas para asegurar la consistencia en los estilos.
+- TypeScript: Las pruebas unitarias y de integración se configuran progresivamente.
+
+
+
+## CI/CD con GitHub Actions
+El proyecto utiliza GitHub Actions para manejar los procesos de CI/CD, incluyendo un flujo de trabajo de lint.yml para mantener la calidad de código y un release-drafter.yml para automatizar la creación de borradores de lanzamientos.
+
+### Workflows Actuales
+- Lint: Ejecuta ESLint y asegura que no haya problemas de linting antes de realizar un merge.
+- Release Drafter: Genera automáticamente un borrador de lanzamiento con los cambios más recientes.
+### Branches Principales
+Utilizamos un flujo de trabajo basado en Git Flow, con las siguientes ramas principales:
+
+- dev: Rama de desarrollo.
+- test: Rama utilizada para pruebas antes de pasar a main.
+- main: Rama de producción final.
+Despliegue
+Para el despliegue de los componentes de Storybook, se ha utilizado la plataforma Chromatic, lo que permite visualizar los componentes sin necesidad de una infraestructura adicional. La aplicación principal está en proceso de integración para despliegue en un entorno de staging.

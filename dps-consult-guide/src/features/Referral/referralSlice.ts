@@ -25,7 +25,7 @@ export const fetchReferrals = createAsyncThunk(
         return response.data.data.data[0].estado.map((estado: any) => ({
           label: estado.descripcion.toLowerCase(),
           date: `${estado.fecha} ${estado.hora || ''}`,
-          status: estado.descripcion.toLowerCase(),
+          status: estado.descripcion.toCapitalize(),
           isError: estado.descripcion === 'Cerrado por incidencia',
         }));
       } catch (error: any) {
